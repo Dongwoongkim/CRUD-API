@@ -1,5 +1,7 @@
-package dongwoongkim.crud.dto;
+package dongwoongkim.crud.dto.board;
 
+import dongwoongkim.crud.domain.Member;
+import dongwoongkim.crud.dto.member.MemberRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,8 +14,6 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class BoardRequestDto {
 
-    private Long id;
-
     @NotBlank(message = "게시글 제목을 입력해주세요.")
     private String title;
 
@@ -22,5 +22,6 @@ public class BoardRequestDto {
 
     @NotBlank(message = "게시글 작성자를 입력해주세요.")
     private String writer;
+
 
 }

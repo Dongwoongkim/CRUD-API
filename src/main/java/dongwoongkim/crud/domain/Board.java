@@ -1,26 +1,26 @@
 package dongwoongkim.crud.domain;
 
+import dongwoongkim.crud.domain.base.BaseEntity;
+import dongwoongkim.crud.dto.board.BoardEditRequestDto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.domain.Persistable;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EntityListeners(AuditingEntityListener.class) // @CreatedDate
-public class Board implements Persistable<Long> {
+public class Board extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BOARD_ID")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String title;
 
     @Column(nullable = false)
@@ -29,24 +29,21 @@ public class Board implements Persistable<Long> {
     @Column(nullable = false)
     private String writer;
 
-    @CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime createdDate;
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
+    @OrderBy("id asc")
+    private List<Comment> comments = new ArrayList<>();
 
-    @Override
-    public boolean isNew() {
-        return createdDate==null;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
 
     public Board(String title, String content, String writer) {
         this.title = title;
         this.content = content;
         this.writer = writer;
     }
-
-    public void updateBoard(String title, String content, String writer) {
-        this.title = title;
-        this.content = content;
-        this.writer = writer;
+    public void updateBoard(BoardEditRequestDto boardEditRequestDto) {
+        this.title = boardEditRequestDto.getTitle();
+        this.content = boardEditRequestDto.getContent();
     }
 }

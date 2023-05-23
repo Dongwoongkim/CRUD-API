@@ -16,7 +16,6 @@ public class CrudApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CrudApplication.class, args);
 	}
-
 	@Bean
 	public AuditorAware<String> auditorProvider() {
 		return () -> Optional.of(UUID.randomUUID().toString());

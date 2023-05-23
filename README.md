@@ -1,30 +1,37 @@
 # CRUD API
-1. **Domain**
-    1. Board
-        1. id(PK, IDENTITY 전략)
-        2. title
-        3. content
-        4. writer
-        5. createdDate ( null → save() , not null → merge() by Persistable )
-2. **DTO**
-    1. 요청 DTO
-        1. BoardRequestDto : 저장
-        2. BoardEditDto : 수정
-    2. 응답 DTO
-        1. BoardResponseDto
-3. **Repository** : Spring Data JPA JpaRepository 사용
-4. **Reponse** : request에 대한 response 객체
-    1. success()
-        1. success(T) : 응답 DTO 리턴
-        2. sucess()
-    2. failure() : 오류 코드, Failure 객체에 오류 메시지 담아 리턴
-5. **Exception** : 저장, 수정, 조회에서 발생한 변환 예외
-    1. BoardNotFoundException : 수정,삭제 조회 작업 중 조회 실패 예외
-    2. WriteFailureException : 저장 실패 예외
-    3. UpdateFailureException : 수정 실패 예외
-6. **Advisor** : 5에서 발생한 예외 처리 후 Reponse로 변환 & 리턴하도록 하는 예외처리기
-7. **Service** : Repository 접근
-8. **web** : RequestMapping → Service 접근
+# 개요
+
+- 명칭 : Spring Boot 게시판 API 구현
+- 개발 언어 : Java 11
+- 개발 환경 : Spring Boot 2.7.12
+- 데이터베이스 : H2
+- 형상관리 툴 : GitHub
+- 메인 기능
+    - 1. 게시판 - CRUD 기능, 페이징, 검색
+    - 2. 댓글 - CRUD 기능
+    - 3. 회원 - Security 회원가입, 로그인, 회원정보 수정, 유효성 및 중복 검사 ( 추후 Security 학습 이후 진행 예정)
+- 서브 기능
+  - 
+
+---
+
+# **API 설계 - CRUD**
+
+게시판 기능을 제공하는 RESTful API 해당 API는 HTTP 프로토콜을 사용하며, JSON 형식의 데이터를 주고받습니다.
+
+| 기능 | 메소드 | URL | RETURN TYPE |
+| --- | --- | --- | --- |
+| 단건 조회 요청 | GET | /boards/{id} | BoardResponseDto = {title, content, writer} |
+| 전체 조회 요청 ( 페이징  적용 ) | GET | /boards?page={id} | BoardResponseDto_list = { data : {title, content, writer}, … } |
+| 전체 조회 요청 | GET | /boards | BoardResponseDto_list = { data : {title, content, writer}, … } |
+| 게시물 작성 | POST | /boards | BoardResponseDto |
+| 게시물 수정 | PUT | /boards/{id} | BoardResponseDto |
+| 게시물 삭제 | DELETE | /boards/{id} | “삭제완료” |
+
+| 기능 | 메소드 | URL | RETURN TYPE |
+| --- | --- | --- | --- |
+| 회원 등록 | POST | /member/save | MemberResponseDto = {id, username, password, nickname, email, role} |
+| 회원 수정 | PATCH | /member/patch/{id} | MemberResponseDto = {id, username, password, nickname, email, role} |
 
 ---
 
@@ -64,4 +71,5 @@ logging.level:
   org.hibernate.SQL: debug
 ```
 
+---
 ---

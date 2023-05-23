@@ -1,6 +1,7 @@
 package dongwoongkim.crud.advisor;
 
 import dongwoongkim.crud.exception.BoardNotFoundException;
+import dongwoongkim.crud.exception.MemberNotFoundException;
 import dongwoongkim.crud.exception.UpdateFailureException;
 import dongwoongkim.crud.exception.WriteFailureException;
 import dongwoongkim.crud.response.Response;
@@ -29,6 +30,11 @@ public class ExceptionAdvisor {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Response updateFailureException() {
         return Response.failure(404, "게시글 수정에 실패하였습니다.");
+    }
+    @ExceptionHandler(MemberNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Response memberNotFoundException() {
+        return Response.failure(404, "해당 회원을 찾을 수 없습니다.");
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

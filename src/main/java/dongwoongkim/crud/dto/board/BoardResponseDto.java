@@ -1,12 +1,9 @@
-package dongwoongkim.crud.dto;
+package dongwoongkim.crud.dto.board;
 
 import dongwoongkim.crud.domain.Board;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -16,15 +13,13 @@ public class BoardResponseDto {
     private String titleDto;
     private String contentDto;
     private String writerDto;
-    private LocalDateTime createdDate;
 
     public static BoardResponseDto toDto(Board board) {
         return new BoardResponseDto(
                 board.getId(),
                 board.getTitle(),
                 board.getContent(),
-                board.getWriter(),
-                board.getCreatedDate()
+                board.getWriter()
         );
     }
 }
