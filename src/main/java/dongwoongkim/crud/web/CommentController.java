@@ -40,7 +40,7 @@ public class CommentController {
         BoardResponseDto boardResponseDto = boardService.findById(boardId);
         MemberResponseDto memberResponseDto = memberService.findByNickname(nickName);
         CommentResponseDto commentResponseDto = commentService.save(commentRequestDto, boardId, nickName);
-        return Response.success();
+        return Response.success(commentResponseDto);
     }
 
     @PatchMapping("/comment/{commentId}")
