@@ -23,15 +23,12 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class CommentService {
-
     private final CommentRepository commentRepository;
     private final MemberRepository memberRepository;
     private final BoardRepository boardRepository;
 
-    // 저장
-    @Transactional
     public CommentResponseDto save(@RequestBody CommentRequestDto commentRequestDto, Long boardId, String nickName) {
 
         Member member = memberRepository.findByNickname(nickName).orElseThrow(MemberNotFoundException::new);
@@ -43,20 +40,17 @@ public class CommentService {
         Comment comment = commentRepository.save(Comment.toEntity(commentRequestDto));
         return CommentResponseDto.toDto(comment);
     }
-    // 수정
-    @Transactional
     public CommentResponseDto update(Long id, CommentEditRequestDto commentEditRequestDto) {
         Comment comment = commentRepository.findById(id).orElseThrow(CommentNotFoundException::new);
         comment.update(commentEditRequestDto.getComment());
         return CommentResponseDto.toDto(comment);
     }
-    // 삭제
-    @Transactional
     public void delete(Long id) {
         Comment comment = commentRepository.findById(id).orElseThrow(CommentNotFoundException::new);
         commentRepository.delete(comment);
     }
-    // 조회
+
+    @Transactional(readOnly = true)
     public List<CommentResponseDto> findAll(Long id) {
         Board board = boardRepository.findById(id).orElseThrow(BoardNotFoundException::new);
         List<Comment> comments = board.getComments();

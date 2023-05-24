@@ -20,14 +20,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
     private final MemberRepository memberRepository;
 
-    // 저장
     @Transactional
     public MemberResponseDto save(MemberRequestDto memberRequestDto) {
         Member member = memberRepository.save(new Member(memberRequestDto));
         return MemberResponseDto.toDto(member);
     }
 
-    // 수정
     @Transactional
     public MemberResponseDto update(Long id, MemberEditRequestDto memberEditRequestDto) {
         Member member = memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
@@ -41,7 +39,6 @@ public class MemberService {
         return MemberResponseDto.toDto(member);
     }
 
-    // 삭제
     @Transactional
     public void delete(Long id) {
         Member member = memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);

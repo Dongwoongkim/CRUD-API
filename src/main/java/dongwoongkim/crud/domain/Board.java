@@ -16,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Board extends BaseEntity {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BOARD_ID")
@@ -27,13 +28,13 @@ public class Board extends BaseEntity {
     @Column(nullable = false)
     private String content;
 
-    @OneToMany(mappedBy = "board")
-    @OrderBy("id asc")
-    private List<Comment> comments = new ArrayList<>();
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
+
+    @OneToMany(mappedBy = "board")
+    @OrderBy("id asc")
+    private List<Comment> comments = new ArrayList<>();
 
     public Board(String title, String content, Member member) {
         this.title = title;

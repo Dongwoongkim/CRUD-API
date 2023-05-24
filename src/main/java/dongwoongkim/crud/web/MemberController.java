@@ -18,23 +18,20 @@ import javax.validation.Valid;
 public class MemberController {
     private final MemberService memberService;
 
-    // 저장
-    @PostMapping("/save")
-    public Response save(@Valid @RequestBody MemberRequestDto memberRequestDto) {
+    @PostMapping
+    public Response memberSave(@Valid @RequestBody MemberRequestDto memberRequestDto) {
         MemberResponseDto memberResponseDto = memberService.save(memberRequestDto);
         return Response.success(memberResponseDto);
     }
 
-    // 수정
-    @PatchMapping("/patch/{id}")
-    public Response update(@PathVariable Long id, @Valid @RequestBody MemberEditRequestDto memberEditRequestDto) {
+    @PatchMapping("/{id}")
+    public Response memberEdit(@PathVariable Long id, @Valid @RequestBody MemberEditRequestDto memberEditRequestDto) {
         MemberResponseDto memberResponseDto = memberService.update(id, memberEditRequestDto);
         return Response.success(memberResponseDto);
     }
 
-    // 삭제
-    @DeleteMapping("/delete/{id}")
-    public Response delete(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public Response memberDelete(@PathVariable Long id) {
         memberService.delete(id);
         return Response.success("회원 삭제 완료");
     }

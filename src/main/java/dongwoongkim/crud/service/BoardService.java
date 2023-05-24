@@ -24,29 +24,21 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class BoardService {
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;
-
-    // 전체 조회
-    public List<BoardResponseDto> findAll() {
-        List<Board> boards = boardRepository.findAll();
-        return boards.stream().map(b -> BoardResponseDto.toDto(b)).collect(Collectors.toList());
-    }
 
     public Page<BoardResponseDto> findAll(Pageable pageable) {
         Page<Board> page = boardRepository.findAll(pageable);
         return page.map(b -> BoardResponseDto.toDto(b));
     }
 
-    // 조회
     public BoardResponseDto findById(Long id) {
         Board board = boardRepository.findById(id).orElseThrow(BoardNotFoundException::new);
         return BoardResponseDto.toDto(board);
     }
 
-    // 저장
     @Transactional
     public BoardResponseDto save(BoardRequestDto boardRequestDto, String nickName) {
         Member member = memberRepository.findByNickname(nickName).orElseThrow(MemberNotFoundException::new);
@@ -58,7 +50,6 @@ public class BoardService {
         return BoardResponseDto.toDto(board);
     }
 
-    // 수정
     @Transactional
     public BoardResponseDto update(Long id, BoardEditRequestDto boardEditRequestDto) {
         Board board = boardRepository.findById(id).orElseThrow(BoardNotFoundException::new);
@@ -66,10 +57,10 @@ public class BoardService {
         return BoardResponseDto.toDto(board);
     }
 
-    // 삭제
     @Transactional
     public void delete(Long id) {
         Board board = boardRepository.findById(id).orElseThrow(BoardNotFoundException::new);
         boardRepository.delete(board);
     }
+
 }
