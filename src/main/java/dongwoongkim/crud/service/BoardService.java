@@ -46,16 +46,13 @@ public class BoardService {
 
     // 저장
     @Transactional
-    public BoardResponseDto save(BoardRequestDto boardRequestDto) {
-        Board board = boardRepository.save(new Board(
-                boardRequestDto.getTitle(),
-                boardRequestDto.getContent(),
-                boardRequestDto.getWriter()));
-
+    public BoardResponseDto save(BoardRequestDto boardRequestDto, String nickName) {
+        Member member = memberRepository.findByNickname(nickName).orElseThrow(MemberNotFoundException::new);
+        boardRequestDto.setMember(member);
+        Board board = boardRepository.save(Board.toEntity(boardRequestDto));
         if (board == null) {
             throw new WriteFailureException();
         }
-
         return BoardResponseDto.toDto(board);
     }
 
@@ -69,9 +66,8 @@ public class BoardService {
 
     // 삭제
     @Transactional
-    public BoardResponseDto delete(Long id) {
+    public void delete(Long id) {
         Board board = boardRepository.findById(id).orElseThrow(BoardNotFoundException::new);
         boardRepository.delete(board);
-        return BoardResponseDto.toDto(board);
     }
 }

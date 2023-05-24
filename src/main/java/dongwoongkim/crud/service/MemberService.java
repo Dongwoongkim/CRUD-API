@@ -7,11 +7,13 @@ import dongwoongkim.crud.dto.member.MemberResponseDto;
 import dongwoongkim.crud.exception.MemberNotFoundException;
 import dongwoongkim.crud.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -33,8 +35,16 @@ public class MemberService {
         return MemberResponseDto.toDto(member);
     }
 
-    public MemberResponseDto findById(Long id) {
-        Member member = memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
+    public MemberResponseDto findByNickname(String nickName) {
+        Member member = memberRepository.findByNickname(nickName).orElseThrow(MemberNotFoundException::new);
+        log.info("member = {} ",member.getEmail());
         return MemberResponseDto.toDto(member);
+    }
+
+    // 삭제
+    @Transactional
+    public void delete(Long id) {
+        Member member = memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
+        memberRepository.delete(member);
     }
 }

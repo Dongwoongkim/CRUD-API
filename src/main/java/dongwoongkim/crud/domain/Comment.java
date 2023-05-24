@@ -1,6 +1,7 @@
 package dongwoongkim.crud.domain;
 
 import dongwoongkim.crud.domain.base.BaseEntity;
+import dongwoongkim.crud.dto.comment.CommentRequestDto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,16 @@ public class Comment extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
+
+    public Comment(String comment, Board board, Member member) {
+        this.comment = comment;
+        this.board = board;
+        this.member = member;
+    }
+
+    public static Comment toEntity(CommentRequestDto commentRequestDto) {
+        return new Comment(commentRequestDto.getComment(),commentRequestDto.getBoard(),commentRequestDto.getMember());
+    }
 
     public void update(String comment) {
         this.comment = comment;

@@ -12,14 +12,12 @@ public class BoardResponseDto {
     private Long id;
     private String titleDto;
     private String contentDto;
-    private String writerDto;
 
     public static BoardResponseDto toDto(Board board) {
         return new BoardResponseDto(
                 board.getId(),
                 board.getTitle(),
-                board.getContent(),
-                board.getWriter()
+                board.getContent()
         );
     }
 }

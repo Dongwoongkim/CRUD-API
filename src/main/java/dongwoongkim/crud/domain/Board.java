@@ -2,6 +2,7 @@ package dongwoongkim.crud.domain;
 
 import dongwoongkim.crud.domain.base.BaseEntity;
 import dongwoongkim.crud.dto.board.BoardEditRequestDto;
+import dongwoongkim.crud.dto.board.BoardRequestDto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,9 +27,6 @@ public class Board extends BaseEntity {
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
-    private String writer;
-
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     @OrderBy("id asc")
     private List<Comment> comments = new ArrayList<>();
@@ -37,11 +35,16 @@ public class Board extends BaseEntity {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    public Board(String title, String content, String writer) {
+    public Board(String title, String content, Member member) {
         this.title = title;
         this.content = content;
-        this.writer = writer;
+        this.member = member;
     }
+
+    public static Board toEntity(BoardRequestDto boardRequestDto) {
+        return new Board(boardRequestDto.getTitle(), boardRequestDto.getContent(), boardRequestDto.getMember());
+    }
+
     public void updateBoard(BoardEditRequestDto boardEditRequestDto) {
         this.title = boardEditRequestDto.getTitle();
         this.content = boardEditRequestDto.getContent();

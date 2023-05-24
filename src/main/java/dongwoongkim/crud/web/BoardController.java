@@ -4,8 +4,10 @@ package dongwoongkim.crud.web;
 import dongwoongkim.crud.dto.board.BoardEditRequestDto;
 import dongwoongkim.crud.dto.board.BoardRequestDto;
 import dongwoongkim.crud.dto.board.BoardResponseDto;
+import dongwoongkim.crud.dto.member.MemberResponseDto;
 import dongwoongkim.crud.response.Response;
 import dongwoongkim.crud.service.BoardService;
+import dongwoongkim.crud.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +22,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
+    private final MemberService memberService;
 
     // 전체 조회 ( 페이징 )
     @GetMapping
@@ -37,8 +40,9 @@ public class BoardController {
 
     // 등록
     @PostMapping
-    public Response save(@Valid @RequestBody BoardRequestDto boardRequestDto) {
-        BoardResponseDto boardResponseDto = boardService.save(boardRequestDto);
+    public Response save(@Valid @RequestBody BoardRequestDto boardRequestDto, @RequestParam String nickName) {
+        MemberResponseDto memberResponseDto = memberService.findByNickname(nickName);
+        BoardResponseDto boardResponseDto = boardService.save(boardRequestDto,nickName);
         return Response.success(boardResponseDto);
     }
 
@@ -55,6 +59,5 @@ public class BoardController {
         boardService.delete(id);
         return Response.success("삭제 완료");
     }
-
 
 }

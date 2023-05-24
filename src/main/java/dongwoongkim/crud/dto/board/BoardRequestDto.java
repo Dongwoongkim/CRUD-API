@@ -20,8 +20,6 @@ public class BoardRequestDto {
     @NotBlank(message = "게시글 내용을 입력해주세요.")
     private String content;
 
-    @NotBlank(message = "게시글 작성자를 입력해주세요.")
-    private String writer;
-
+    private Member member;
 
 }
