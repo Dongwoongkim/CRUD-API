@@ -27,7 +27,7 @@ public class Board extends BaseEntity {
     @Column(nullable = false)
     private String content;
 
-    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "board")
     @OrderBy("id asc")
     private List<Comment> comments = new ArrayList<>();
 

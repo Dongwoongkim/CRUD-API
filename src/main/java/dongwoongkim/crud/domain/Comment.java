@@ -1,5 +1,6 @@
 package dongwoongkim.crud.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dongwoongkim.crud.domain.base.BaseEntity;
 import dongwoongkim.crud.dto.comment.CommentRequestDto;
 import lombok.AccessLevel;
@@ -41,4 +42,5 @@ public class Comment extends BaseEntity {
     public void update(String comment) {
         this.comment = comment;
     }
+
 }

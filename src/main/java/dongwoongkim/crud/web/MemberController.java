@@ -32,4 +32,11 @@ public class MemberController {
         return Response.success(memberResponseDto);
     }
 
+    // 삭제
+    @DeleteMapping("/delete/{id}")
+    public Response delete(@PathVariable Long id) {
+        memberService.delete(id);
+        return Response.success("회원 삭제 완료");
+    }
+
 }

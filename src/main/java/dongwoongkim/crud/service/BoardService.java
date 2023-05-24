@@ -12,6 +12,7 @@ import dongwoongkim.crud.exception.MemberNotFoundException;
 import dongwoongkim.crud.exception.WriteFailureException;
 import dongwoongkim.crud.repository.BoardRepository;
 import dongwoongkim.crud.repository.MemberRepository;
+import dongwoongkim.crud.response.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,7 +42,8 @@ public class BoardService {
 
     // 조회
     public BoardResponseDto findById(Long id) {
-        return BoardResponseDto.toDto(boardRepository.findById(id).orElseThrow(BoardNotFoundException::new));
+        Board board = boardRepository.findById(id).orElseThrow(BoardNotFoundException::new);
+        return BoardResponseDto.toDto(board);
     }
 
     // 저장

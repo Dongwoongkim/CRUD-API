@@ -47,7 +47,7 @@ public class BoardController {
     }
 
     // 수정
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public Response edit(@PathVariable Long id, @Valid @RequestBody BoardEditRequestDto boardEditRequestDto) {
         BoardResponseDto boardResponseDto = boardService.update(id, boardEditRequestDto);
         return Response.success(boardResponseDto);
@@ -57,7 +57,7 @@ public class BoardController {
     @DeleteMapping("/{id}")
     public Response delete(@PathVariable Long id) {
         boardService.delete(id);
-        return Response.success("삭제 완료");
+        return Response.success("글 삭제 완료");
     }
 
 }

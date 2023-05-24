@@ -34,11 +34,15 @@ public class Member extends BaseEntity {
     @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private MemberRole role;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Board> boards = new ArrayList<>();
 
     public Member(MemberRequestDto memberRequestDto) {
         this.username = memberRequestDto.getUsername();
