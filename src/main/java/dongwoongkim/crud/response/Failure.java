@@ -11,3 +11,4 @@ import lombok.Getter;
 public class Failure implements Result {
     String msg;
 }
+

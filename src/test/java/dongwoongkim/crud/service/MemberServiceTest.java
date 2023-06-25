@@ -1,8 +1,7 @@
 package dongwoongkim.crud.service;
 
-import dongwoongkim.crud.domain.Member;
+import dongwoongkim.crud.domain.member.Member;
 import dongwoongkim.crud.dto.member.MemberEditRequestDto;
-import dongwoongkim.crud.dto.member.MemberResponseDto;
 import dongwoongkim.crud.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
@@ -12,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 @SpringBootTest
@@ -29,6 +26,7 @@ class MemberServiceTest {
     void clear() {
         memberRepository.deleteAll();
     }
+
     @Test
     void 회원생성() {
         // given

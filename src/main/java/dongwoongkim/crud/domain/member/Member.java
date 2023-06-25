@@ -1,16 +1,19 @@
-package dongwoongkim.crud.domain;
+package dongwoongkim.crud.domain.member;
 
-import dongwoongkim.crud.domain.base.BaseEntity;
+import dongwoongkim.crud.domain.comment.Comment;
+import dongwoongkim.crud.domain.BaseEntity;
+import dongwoongkim.crud.domain.board.Board;
 import dongwoongkim.crud.dto.member.MemberEditRequestDto;
 import dongwoongkim.crud.dto.member.MemberRequestDto;
-import dongwoongkim.crud.repository.MemberRepository;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -34,9 +37,9 @@ public class Member extends BaseEntity {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private MemberRole role;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<MemberRole> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
@@ -49,7 +52,6 @@ public class Member extends BaseEntity {
         this.password = memberRequestDto.getPassword();
         this.nickname = memberRequestDto.getNickname();
         this.email = memberRequestDto.getEmail();
-        this.role = memberRequestDto.getRole();
     }
 
     public Member(String username, String password, String nickname, String email) {

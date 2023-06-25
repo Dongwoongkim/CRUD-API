@@ -1,8 +1,8 @@
 package dongwoongkim.crud.service;
 
-import dongwoongkim.crud.domain.Board;
-import dongwoongkim.crud.domain.Comment;
-import dongwoongkim.crud.domain.Member;
+import dongwoongkim.crud.domain.board.Board;
+import dongwoongkim.crud.domain.comment.Comment;
+import dongwoongkim.crud.domain.member.Member;
 import dongwoongkim.crud.dto.comment.CommentEditRequestDto;
 import dongwoongkim.crud.dto.comment.CommentRequestDto;
 import dongwoongkim.crud.dto.comment.CommentResponseDto;
@@ -12,7 +12,6 @@ import dongwoongkim.crud.exception.MemberNotFoundException;
 import dongwoongkim.crud.repository.BoardRepository;
 import dongwoongkim.crud.repository.CommentRepository;
 import dongwoongkim.crud.repository.MemberRepository;
-import dongwoongkim.crud.response.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

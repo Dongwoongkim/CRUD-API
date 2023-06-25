@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class ExceptionAdvisor {
-
     @ExceptionHandler(BoardNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Response boardNotFoundException() {
@@ -43,3 +42,5 @@ public class ExceptionAdvisor {
         return Response.failure(400,e.getBindingResult().getFieldError().getDefaultMessage());
     }
 }
+
+

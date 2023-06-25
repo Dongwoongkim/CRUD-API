@@ -1,6 +1,8 @@
-package dongwoongkim.crud.domain;
+package dongwoongkim.crud.domain.board;
 
-import dongwoongkim.crud.domain.base.BaseEntity;
+import dongwoongkim.crud.domain.comment.Comment;
+import dongwoongkim.crud.domain.member.Member;
+import dongwoongkim.crud.domain.BaseEntity;
 import dongwoongkim.crud.dto.board.BoardEditRequestDto;
 import dongwoongkim.crud.dto.board.BoardRequestDto;
 import lombok.AccessLevel;
@@ -15,7 +17,6 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Board extends BaseEntity {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +42,6 @@ public class Board extends BaseEntity {
         this.content = content;
         this.member = member;
     }
-
     public static Board toEntity(BoardRequestDto boardRequestDto) {
         return new Board(boardRequestDto.getTitle(), boardRequestDto.getContent(), boardRequestDto.getMember());
     }

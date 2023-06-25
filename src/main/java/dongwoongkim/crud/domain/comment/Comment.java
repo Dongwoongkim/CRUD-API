@@ -1,7 +1,8 @@
-package dongwoongkim.crud.domain;
+package dongwoongkim.crud.domain.comment;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import dongwoongkim.crud.domain.base.BaseEntity;
+import dongwoongkim.crud.domain.BaseEntity;
+import dongwoongkim.crud.domain.board.Board;
+import dongwoongkim.crud.domain.member.Member;
 import dongwoongkim.crud.dto.comment.CommentRequestDto;
 import lombok.AccessLevel;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package dongwoongkim.crud.web;
+package dongwoongkim.crud.controller;
 
 import dongwoongkim.crud.dto.board.BoardResponseDto;
 import dongwoongkim.crud.dto.comment.CommentEditRequestDto;

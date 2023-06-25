@@ -1,13 +1,10 @@
 package dongwoongkim.crud.dto.board;
 
-import dongwoongkim.crud.domain.Board;
-import dongwoongkim.crud.domain.Comment;
-import dongwoongkim.crud.domain.base.BaseEntity;
+import dongwoongkim.crud.domain.board.Board;
 import dongwoongkim.crud.dto.comment.CommentResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

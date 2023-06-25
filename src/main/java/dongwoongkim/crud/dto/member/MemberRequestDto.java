@@ -1,7 +1,6 @@
 package dongwoongkim.crud.dto.member;
 
-import dongwoongkim.crud.domain.Member;
-import dongwoongkim.crud.domain.MemberRole;
+import dongwoongkim.crud.domain.member.Member;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -19,7 +18,6 @@ public class MemberRequestDto {
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
     private String password;
 
-
     @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9-_]{2,10}$", message = "닉네임은 특수문자를 제외한 2~10자리여야 합니다.")
     @NotBlank(message = "닉네임은 필수 입력 값입니다.")
     private String nickname;
@@ -28,10 +26,11 @@ public class MemberRequestDto {
     @NotBlank(message = "이메일은 필수 입력 값입니다.")
     private String email;
 
-    private MemberRole role;
 
     public static MemberRequestDto toDto(Member member) {
-        return new MemberRequestDto(member.getUsername(), member.getPassword(), member.getNickname(), member.getEmail(), member.getRole());
+        return new MemberRequestDto(member.getUsername(), member.getPassword(), member.getNickname(), member.getEmail());
     }
 
 }
+
+

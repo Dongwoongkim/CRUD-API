@@ -1,16 +1,12 @@
 package dongwoongkim.crud.dto.board;
 
-import dongwoongkim.crud.domain.Board;
-import dongwoongkim.crud.domain.Comment;
-import dongwoongkim.crud.domain.Member;
-import dongwoongkim.crud.dto.member.MemberRequestDto;
+import dongwoongkim.crud.domain.board.Board;
+import dongwoongkim.crud.domain.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 @Data
 @AllArgsConstructor

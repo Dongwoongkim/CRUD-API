@@ -1,6 +1,5 @@
 package dongwoongkim.crud.dto.comment;
 
-import dongwoongkim.crud.domain.Board;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

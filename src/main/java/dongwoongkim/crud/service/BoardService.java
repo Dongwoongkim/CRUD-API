@@ -1,30 +1,24 @@
 package dongwoongkim.crud.service;
 
-import dongwoongkim.crud.domain.Board;
-import dongwoongkim.crud.domain.Member;
+import dongwoongkim.crud.domain.board.Board;
+import dongwoongkim.crud.domain.member.Member;
 import dongwoongkim.crud.dto.board.BoardEditRequestDto;
 import dongwoongkim.crud.dto.board.BoardRequestDto;
 import dongwoongkim.crud.dto.board.BoardResponseDto;
-import dongwoongkim.crud.dto.member.MemberRequestDto;
-import dongwoongkim.crud.dto.member.MemberResponseDto;
 import dongwoongkim.crud.exception.BoardNotFoundException;
 import dongwoongkim.crud.exception.MemberNotFoundException;
 import dongwoongkim.crud.exception.WriteFailureException;
 import dongwoongkim.crud.repository.BoardRepository;
 import dongwoongkim.crud.repository.MemberRepository;
-import dongwoongkim.crud.response.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly = true)
 public class BoardService {
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;

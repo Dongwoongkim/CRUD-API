@@ -1,13 +1,11 @@
-package dongwoongkim.crud.web;
+package dongwoongkim.crud.controller;
 
-import dongwoongkim.crud.domain.Member;
 import dongwoongkim.crud.dto.member.MemberEditRequestDto;
 import dongwoongkim.crud.dto.member.MemberRequestDto;
 import dongwoongkim.crud.dto.member.MemberResponseDto;
 import dongwoongkim.crud.response.Response;
 import dongwoongkim.crud.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,15 +18,17 @@ public class MemberController {
 
     @PostMapping
     public Response memberSave(@Valid @RequestBody MemberRequestDto memberRequestDto) {
-        MemberResponseDto memberResponseDto = memberService.save(memberRequestDto);
+         MemberResponseDto memberResponseDto = memberService.save(memberRequestDto);
         return Response.success(memberResponseDto);
     }
+
 
     @PatchMapping("/{id}")
     public Response memberEdit(@PathVariable Long id, @Valid @RequestBody MemberEditRequestDto memberEditRequestDto) {
         MemberResponseDto memberResponseDto = memberService.update(id, memberEditRequestDto);
         return Response.success(memberResponseDto);
     }
+
 
     @DeleteMapping("/{id}")
     public Response memberDelete(@PathVariable Long id) {

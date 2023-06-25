@@ -1,9 +1,6 @@
 package dongwoongkim.crud.dto.comment;
 
-import dongwoongkim.crud.domain.Board;
-import dongwoongkim.crud.domain.Comment;
-import dongwoongkim.crud.domain.Member;
-import dongwoongkim.crud.dto.member.MemberResponseDto;
+import dongwoongkim.crud.domain.comment.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
